@@ -9,7 +9,7 @@ Tailwindcss v3 webpack plugin for CRA (Create React App) v3/v4
 
 ## Usage
 - install
-`npm install -D tailwindcss@latest postcss@latest autoprefixer@latest tailwind-cra-webpack-plugin`
+```npm install -D tailwindcss@latest postcss@latest autoprefixer@latest tailwind-cra-webpack-plugin```
 
 - apply
 ```javascript
