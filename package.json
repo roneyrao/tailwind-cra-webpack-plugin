@@ -1,0 +1,21 @@
+{
+  "name": "tailwind-cra-webpack-plugin",
+  "version": "1.0.0",
+  "description": "Tailwindcss v3 webpack plugin for CRA (Create React App) v3/v4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:roneyrao/tailwind-cra-webpack-plugin.git"
+  },
+  "keywords": [
+    "tailwindcss",
+    "webpack",
+    "create-react-app-v3",
+    "create-react-app-v4"
+  ],
+  "author": "Roney Rao",
+  "license": "MIT"
+}
