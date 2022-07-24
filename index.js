@@ -18,7 +18,8 @@ class TailwindWebpackPlugin {
   onChange(changedFiles) {
     // Compile when any target js changed
     this.forceRebuild = !!changedFiles.find(f => (
-      (f.endsWith('.js') || f.endsWith('.jsx'))
+      // take it simple for performance
+      (f.endsWith('.js') || f.endsWith('.ts'))
       && this.targetFolders.find(folder => f.startsWith(folder))
     ))
   }
