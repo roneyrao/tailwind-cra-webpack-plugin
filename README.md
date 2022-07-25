@@ -22,7 +22,7 @@ const { TailwindWebpackPlugin } = require('tailwind-cra-webpack-plugin')
 module.exports = {
   webpack: {
     plugins: [
-      // The css entry point
++     // The css entry point
 +     new TailwindWebpackPlugin(require.resolve('../src/index.css')),
     ],
   },
