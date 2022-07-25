@@ -25,7 +25,16 @@ module.exports = {
       // The css entry point
       new TailwindWebpackPlugin(require.resolve('../src/index.css')),
     ],
-  }
+  },
+  // These are not needed anymore
+  ~~
+  postcss: {
+    plugins: [
+      require('tailwindcss'),
+      require('autoprefixer'),
+    ],
+  },
+  ~~
 }
 ```
 
