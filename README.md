@@ -14,7 +14,7 @@ npm install -D tailwindcss@latest postcss@latest autoprefixer@latest tailwind-cr
 ```
 
 - apply
-```javascript
+```diff
 // craco.config.js as example
 
 const { TailwindWebpackPlugin } = require('tailwind-cra-webpack-plugin')
@@ -23,18 +23,16 @@ module.exports = {
   webpack: {
     plugins: [
       // The css entry point
-      new TailwindWebpackPlugin(require.resolve('../src/index.css')),
++     new TailwindWebpackPlugin(require.resolve('../src/index.css')),
     ],
   },
-  // These are not needed anymore
-  ~~
-  postcss: {
-    plugins: [
-      require('tailwindcss'),
-      require('autoprefixer'),
-    ],
-  },
-  ~~
+- // These are not needed anymore
+- postcss: {
+-   plugins: [
+-     require('tailwindcss'),
+-     require('autoprefixer'),
+-   ],
+- },
 }
 ```
 
