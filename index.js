@@ -1,4 +1,3 @@
-const { sep } =  require('path')
 const postcss = require('postcss')
 
 const plugins = [ require('tailwindcss'), require('autoprefixer')]
@@ -8,13 +7,9 @@ class TailwindWebpackPlugin {
   static name = 'TailwindWebpackPlugin'
   static Instance;
 
-  constructor(utilsPath) {
+  constructor(entry) {
     this.constructor.Instance = this
-    // The css file that contains `@tailwind utilities` (We assume only one file contains it).
-    // It will be recompiled each time when any js file is changed
-    // which are defined in the `content` field in `tailwind.config.js`,
-    // to reflect any new user defined classes.
-    this.utilsPath = utilsPath
+    this.entry = entry
     this.forceRebuild = true // Always compile at startup in case any js changed
     this.targetFolders = null // Filled by the loader
     this.onChangeHandler = this.onChange.bind(this)
@@ -52,23 +47,18 @@ class TailwindWebpackPlugin {
       fs.watch = this.watch.bind(this, fs)
     }
 
-    const node_modules =`${compiler.context}${sep}node_modules${sep}`
-
     compiler.hooks.beforeCompile.tap(this.constructor.name, (params) => {
-      // inject the loader to all "*.css" files in the source scope
+      // inject loader
       params.normalModuleFactory.hooks.afterResolve.tap(this.constructor.name, (data) => {
-        if (data.resource.endsWith('.css')
-          && data.userRequest.length === data.resource.length // exclude derived modules (with loaders appended)
-          && !data.resource.startsWith(node_modules) // exclude 3rd party libraries
-        ) {
+        if (data.userRequest === this.entry) {
           data.loaders.push({ loader: __filename });
         }
       });
       if (isDev) {
         // hook needRebuild
         params.normalModuleFactory.hooks.module.tap(this.constructor.name, (m, data) => {
-          if (data.resource === this.utilsPath
-            && data.userRequest !== this.utilsPath // skip the module without loaders
+          if (data.resource === this.entry
+            && data.userRequest !== this.entry // skip the module without loaders
           ) {
             m.needRebuildO = m.needRebuild
             m.needRebuild = this.needRebuild.bind(this, m)
