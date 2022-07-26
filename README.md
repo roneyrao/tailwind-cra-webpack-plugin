@@ -22,17 +22,20 @@ const { TailwindWebpackPlugin } = require('tailwind-cra-webpack-plugin')
 module.exports = {
   webpack: {
     plugins: [
-+     // The css entry point
++     // The css file that contains `@tailwind utilities` (We assume only one file contains it).
++     // It will be recompiled each time when any js file is changed
++     // which are defined in the `content` field in `tailwind.config.js`,
++     // to reflect any new user defined classes.
 +     new TailwindWebpackPlugin(require.resolve('../src/index.css')),
     ],
   },
-- // These are not needed anymore
-- postcss: {
--   plugins: [
+  postcss: {
+    plugins: [
+      // These are not needed anymore
 -     require('tailwindcss'),
 -     require('autoprefixer'),
--   ],
-- },
+    ],
+  },
 }
 ```
 
