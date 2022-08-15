@@ -1,6 +1,9 @@
 const postcss = require('postcss')
 
 const plugins = [ require('tailwindcss'), require('autoprefixer')]
+if (require.resolve('postcss-import')) {
+  plugins.push(require('postcss-import'))
+}
 
 
 class TailwindWebpackPlugin {
